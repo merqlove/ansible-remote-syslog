@@ -23,11 +23,11 @@
     - restart remote_syslog
 
 - name: copy init script (Ubuntu)
-  copy: src=remote_syslog.upstart.conf dest=/etc/init/remote_syslog.conf
+  copy: content={{ remote_syslog_upstart_file }} dest=/etc/init/remote_syslog.conf
   when: ansible_distribution == 'Ubuntu'
 
 - name: copy init script (Debian)
-  copy: src=remote_syslog.init.d dest=/etc/init.d/remote_syslog
+  copy: content={{ remote_syslog_init_d_file }} dest=/etc/init.d/remote_syslog
   when: ansible_distribution == 'Debian'
 
 - name: Ensure syslog host is set
@@ -39,8 +39,8 @@
   when: remote_syslog_port is not defined
 
 - name: copy log_files.yml
-  template:
-    src: log_files.yml.j2
+  copy:
+    content: "{{ remote_syslog_log_files_template }}"
     dest: /etc/log_files.yml
     owner: root
     group: root
