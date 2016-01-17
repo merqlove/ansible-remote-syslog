@@ -23,13 +23,13 @@
     - restart remote_syslog
 
 - name: copy init script (Ubuntu)
-  copy: content={{ remote_syslog_upstart_file }} dest=/etc/init/remote_syslog.conf
+  copy: content="{{ remote_syslog_upstart_file }}" dest=/etc/init/remote_syslog.conf
   when: "remote_syslog_service_type == 'upstart'"
   notify:
     - restart remote_syslog
 
 - name: copy init script (Debian)
-  copy: content={{ remote_syslog_init_d_file }} dest=/etc/init.d/remote_syslog mode=0755
+  copy: content="{{ remote_syslog_init_d_file }}" dest=/etc/init.d/remote_syslog mode=0755
   when: "remote_syslog_service_type == 'initd'"
   notify:
     - restart remote_syslog
