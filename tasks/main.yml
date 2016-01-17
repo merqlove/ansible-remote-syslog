@@ -27,7 +27,7 @@
   when: remote_syslog_service_type == 'upstart'
 
 - name: copy init script (Debian)
-  copy: content={{ remote_syslog_init_d_file }} dest=/etc/init.d/remote_syslog
+  copy: content={{ remote_syslog_init_d_file }} dest=/etc/init.d/remote_syslog mode=0755
   when: remote_syslog_service_type == 'initd'
 
 - name: Ensure syslog host is set
