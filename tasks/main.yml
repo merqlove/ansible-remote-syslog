@@ -2,14 +2,14 @@
 - name: download package
   get_url:
     url: "{{ remote_syslog_package_url }}"
-    dest: ~/remote_syslog_{{ remote_syslog_version }}.tar.gz
+    dest: "~/remote_syslog_{{ remote_syslog_version }}.tar.gz"
     owner: root
     group: root
     mode: 0644
   register: download
 
 - name: unarchive package
-  command: tar -xzf remote_syslog_{{ remote_syslog_version }}.tar.gz
+  command: "tar -xzf remote_syslog_{{ remote_syslog_version }}.tar.gz"
   args:
     chdir: ~/
   when: download.changed
